@@ -1,9 +1,10 @@
 package es.doterorgz.timebank.service.impl;
 
-import es.doterorgz.timebank.domain.Activity;
 import es.doterorgz.timebank.adapters.entities.ActivityEntity;
+import es.doterorgz.timebank.domain.Activity;
 import es.doterorgz.timebank.mapper.ActivityEntityMapper;
 import es.doterorgz.timebank.repository.ActivityRepository;
+import es.doterorgz.timebank.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

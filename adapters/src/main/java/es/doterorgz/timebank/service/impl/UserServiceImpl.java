@@ -4,6 +4,7 @@ import es.doterorgz.timebank.domain.User;
 import es.doterorgz.timebank.adapters.entities.UserEntity;
 import es.doterorgz.timebank.mapper.UserEntityMapper;
 import es.doterorgz.timebank.repository.UserRepository;
+import es.doterorgz.timebank.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
