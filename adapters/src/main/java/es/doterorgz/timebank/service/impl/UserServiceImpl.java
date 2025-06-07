@@ -1,7 +1,9 @@
 package es.doterorgz.timebank.service.impl;
 
 import es.doterorgz.timebank.domain.User;
+import es.doterorgz.timebank.mapper.UserMapper;
 import es.doterorgz.timebank.repository.UserRepository;
+import es.doterorgz.timebank.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public User create(User user) {

@@ -2,7 +2,9 @@ package es.doterorgz.timebank.service.impl;
 
 import es.doterorgz.timebank.domain.Activity;
 import es.doterorgz.timebank.dto.ActivityDto;
+import es.doterorgz.timebank.mapper.ActivityMapper;
 import es.doterorgz.timebank.repository.ActivityRepository;
+import es.doterorgz.timebank.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActivityServiceImpl implements ActivityService {
     private final ActivityRepository repository;
+    private final ActivityMapper mapper;
 
     @Override
     public Activity create(Activity activity) {
