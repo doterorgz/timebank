@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.ManyToMany;
+import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.Data;
 
@@ -21,6 +22,12 @@ public class Activity {
     private String description;
 
     private int durationHours;
+
+    private double latitude;
+
+    private double longitude;
+
+    private LocalDateTime startDateTime;
 
     @ManyToOne
     private User instructor;

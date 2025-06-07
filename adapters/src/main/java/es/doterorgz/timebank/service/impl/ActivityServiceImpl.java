@@ -1,30 +1,47 @@
 package es.doterorgz.timebank.service.impl;
 
-import es.doterorgz.timebank.dto.ActivityDto;
-import es.doterorgz.timebank.mapper.ActivityMapper;
+import es.doterorgz.timebank.domain.Activity;
 import es.doterorgz.timebank.repository.ActivityRepository;
 import es.doterorgz.timebank.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ActivityServiceImpl implements ActivityService {
     private final ActivityRepository repository;
-    private final ActivityMapper mapper;
 
     @Override
-    public ActivityDto create(ActivityDto dto) {
-        var entity = mapper.toEntity(dto);
-        var saved = repository.save(entity);
-        return mapper.toDto(saved);
+    public Activity create(Activity activity) {
+        return repository.save(activity);
     }
 
     @Override
-    public List<ActivityDto> findAll() {
-        return repository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
+    public List<Activity> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<Activity> findByLocation(double latitude, double longitude, double distance) {
+        return repository.findByLocation(latitude, longitude, distance);
+    }
+
+    @Override
+    public List<Activity> searchByText(String text) {
+        return repository.searchByText(text);
+    }
+
+    @Override
+    public List<Activity> findByDateRange(LocalDateTime start, LocalDateTime end) {
+        return repository.findByDateRange(start, end);
+    }
+
+    @Override
+    public List<Activity> search(double latitude, double longitude, double distance, String text,
+                                LocalDateTime start, LocalDateTime end) {
+        return repository.search(latitude, longitude, distance, text, start, end);
     }
 }
