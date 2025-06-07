@@ -17,7 +17,7 @@ public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> 
             "(concat('%', :text, '%'))")
     List<Activity> searchByText(@Param("text") String text);
 
-    @Query("SELECT a FROM Activityentity a WHERE a.startDateTime BETWEEN :start AND :end")
+    @Query("SELECT a FROM ActivityEntity a WHERE a.startDateTime BETWEEN :start AND :end")
     List<Activity> findByDateRange(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
     @Query(value = "SELECT * FROM activity a WHERE earth_distance(ll_to_earth(:lat, :lon), ll_to_earth(a.latitude, a.longitude)) <= :distance AND (lower(a.title) LIKE lower(concat('%', :text, '%')) OR lower(a.description) LIKE lower(concat('%', :text, '%'))) AND a.start_date_time BETWEEN :start AND :end", nativeQuery = true)

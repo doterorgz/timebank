@@ -15,7 +15,7 @@ public class ActivityServiceImpl implements ActivityService {
     private final ActivityRepository repository;
 
     @Override
-    public Activity save(Activity activity) {
+    public Activity create(Activity activity) {
         return repository.save(activity);
     }
 
