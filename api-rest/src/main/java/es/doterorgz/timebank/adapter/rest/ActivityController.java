@@ -1,8 +1,6 @@
 package es.doterorgz.timebank.adapter.rest;
 
 import es.doterorgz.timebank.dto.ActivityDto;
-import es.doterorgz.timebank.mapper.ActivityMapper;
-import es.doterorgz.timebank.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

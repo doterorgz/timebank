@@ -2,7 +2,6 @@ package es.doterorgz.timebank.service.impl;
 
 import es.doterorgz.timebank.domain.User;
 import es.doterorgz.timebank.repository.UserRepository;
-import es.doterorgz.timebank.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
