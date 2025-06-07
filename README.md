@@ -36,3 +36,25 @@ Endpoints destacados de actividades:
 - `GET /activities/filter?...` combina todos los criterios anteriores.
 
 La configuración de Spring se encuentra en `boot/src/main/resources/application.yml`.
+
+## Base de datos
+
+El servicio utiliza PostgreSQL como base de datos. Los valores de conexión por defecto son:
+
+```
+url: jdbc:postgresql://localhost:5432/timebank
+usuario: postgres
+contraseña: postgres
+```
+
+Antes de arrancar la aplicación, asegúrate de que existe una instancia de PostgreSQL con esa base de datos creada. Para facilitarlo se incluye un `docker-compose.yml` que lanza un contenedor con dichas credenciales:
+
+```bash
+docker-compose up -d
+```
+
+Después puedes ejecutar la aplicación normalmente con:
+
+```bash
+mvn -pl boot spring-boot:run
+```
