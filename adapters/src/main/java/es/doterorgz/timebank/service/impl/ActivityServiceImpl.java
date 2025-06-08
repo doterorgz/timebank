@@ -30,6 +30,24 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public Activity findById(Long id) {
+        return repository.findById(id).map(mapper::toDomain).orElse(null);
+    }
+
+    @Override
+    public Activity update(Long id, Activity activity) {
+        ActivityEntity entity = mapper.toEntity(activity);
+        entity.setId(id);
+        ActivityEntity saved = repository.save(entity);
+        return mapper.toDomain(saved);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
     public List<Activity> findByLocation(double latitude, double longitude, double distance) {
         return repository.findByLocation(latitude, longitude, distance).stream()
                 .map(mapper::toDomain)

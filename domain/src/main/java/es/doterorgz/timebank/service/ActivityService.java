@@ -10,6 +10,12 @@ public interface ActivityService {
 
     List<Activity> findAll();
 
+    Activity findById(Long id);
+
+    Activity update(Long id, Activity activity);
+
+    void delete(Long id);
+
     List<Activity> findByLocation(double latitude, double longitude, double distance);
 
     List<Activity> searchByText(String text);

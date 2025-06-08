@@ -27,4 +27,22 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userRepository.findAll().stream().map(mapper::toDomain).toList();
     }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).map(mapper::toDomain).orElse(null);
+    }
+
+    @Override
+    public User update(Long id, User user) {
+        UserEntity entity = mapper.toEntity(user);
+        entity.setId(id);
+        UserEntity saved = userRepository.save(entity);
+        return mapper.toDomain(saved);
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
 }

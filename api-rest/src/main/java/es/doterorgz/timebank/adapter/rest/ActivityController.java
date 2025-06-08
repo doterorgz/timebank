@@ -8,6 +8,9 @@ import es.doterorgz.timebank.usecase.FindActivitiesByLocationUseCase;
 import es.doterorgz.timebank.usecase.FindAllActivitiesUseCase;
 import es.doterorgz.timebank.usecase.SearchActivitiesByTextUseCase;
 import es.doterorgz.timebank.usecase.SearchActivitiesUseCase;
+import es.doterorgz.timebank.usecase.FindActivityByIdUseCase;
+import es.doterorgz.timebank.usecase.UpdateActivityUseCase;
+import es.doterorgz.timebank.usecase.DeleteActivityUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,9 @@ public class ActivityController {
     private final SearchActivitiesByTextUseCase searchActivitiesByTextUseCase;
     private final FindActivitiesByDateRangeUseCase findActivitiesByDateRangeUseCase;
     private final SearchActivitiesUseCase searchActivitiesUseCase;
+    private final FindActivityByIdUseCase findActivityByIdUseCase;
+    private final UpdateActivityUseCase updateActivityUseCase;
+    private final DeleteActivityUseCase deleteActivityUseCase;
     private final ActivityMapper mapper;
 
     @PostMapping
@@ -37,6 +43,15 @@ public class ActivityController {
     @GetMapping
     public ResponseEntity<List<ActivityDto>> findAll() {
         return ResponseEntity.ok(findAllActivitiesUseCase.execute().stream().map(mapper::toDto).toList());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ActivityDto> findById(@PathVariable Long id) {
+        var activity = findActivityByIdUseCase.execute(id);
+        if (activity == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(mapper.toDto(activity));
     }
 
     @GetMapping("/location")
@@ -67,5 +82,18 @@ public class ActivityController {
                                                     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.time.LocalDateTime end) {
         return ResponseEntity.ok(searchActivitiesUseCase.execute(lat, lon, distance, text, start, end)
                 .stream().map(mapper::toDto).toList());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ActivityDto> update(@PathVariable Long id, @RequestBody ActivityDto dto) {
+        var activity = mapper.toEntity(dto);
+        var updated = updateActivityUseCase.execute(id, activity);
+        return ResponseEntity.ok(mapper.toDto(updated));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        deleteActivityUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }
