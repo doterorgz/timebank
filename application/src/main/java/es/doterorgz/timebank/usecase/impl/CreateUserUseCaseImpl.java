@@ -4,9 +4,9 @@ import es.doterorgz.timebank.domain.User;
 import es.doterorgz.timebank.service.UserService;
 import es.doterorgz.timebank.usecase.CreateUserUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class CreateUserUseCaseImpl implements CreateUserUseCase {
 

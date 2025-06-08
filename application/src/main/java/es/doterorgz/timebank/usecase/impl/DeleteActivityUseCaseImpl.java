@@ -3,9 +3,9 @@ package es.doterorgz.timebank.usecase.impl;
 import es.doterorgz.timebank.service.ActivityService;
 import es.doterorgz.timebank.usecase.DeleteActivityUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class DeleteActivityUseCaseImpl implements DeleteActivityUseCase {
 
