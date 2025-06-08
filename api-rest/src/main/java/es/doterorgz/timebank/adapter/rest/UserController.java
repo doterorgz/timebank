@@ -2,6 +2,7 @@ package es.doterorgz.timebank.adapter.rest;
 
 import es.doterorgz.timebank.dto.UserDto;
 import es.doterorgz.timebank.mapper.UserMapper;
+import es.doterorgz.timebank.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

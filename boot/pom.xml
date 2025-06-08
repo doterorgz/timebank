@@ -19,6 +19,10 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-docker-compose</artifactId>
+        </dependency>
+        <dependency>
             <groupId>es.doterorgz</groupId>
             <artifactId>timebank-application</artifactId>
             <version>${project.version}</version>
@@ -35,6 +39,14 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

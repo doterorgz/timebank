@@ -39,6 +39,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -47,5 +48,16 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <build/>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
