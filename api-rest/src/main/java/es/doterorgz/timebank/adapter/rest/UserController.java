@@ -7,6 +7,7 @@ import es.doterorgz.timebank.usecase.FindAllUsersUseCase;
 import es.doterorgz.timebank.usecase.FindUserByIdUseCase;
 import es.doterorgz.timebank.usecase.UpdateUserUseCase;
 import es.doterorgz.timebank.usecase.DeleteUserUseCase;
+import es.doterorgz.timebank.logging.Loggable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class UserController {
     private final UserMapper mapper;
 
     @PostMapping
+    @Loggable
     public ResponseEntity<UserDto> create(@RequestBody UserDto dto) {
         var user = mapper.toEntity(dto);
         var saved = createUserUseCase.execute(user);
@@ -32,11 +34,13 @@ public class UserController {
     }
 
     @GetMapping
+    @Loggable
     public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.ok(findAllUsersUseCase.execute().stream().map(mapper::toDto).toList());
     }
 
     @GetMapping("/{id}")
+    @Loggable
     public ResponseEntity<UserDto> findById(@PathVariable Long id) {
         var user = findUserByIdUseCase.execute(id);
         if (user == null) {
@@ -46,6 +50,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @Loggable
     public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody UserDto dto) {
         var user = mapper.toEntity(dto);
         var updated = updateUserUseCase.execute(id, user);
@@ -53,6 +58,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @Loggable
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteUserUseCase.execute(id);
         return ResponseEntity.noContent().build();
