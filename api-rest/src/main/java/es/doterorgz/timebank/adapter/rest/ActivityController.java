@@ -11,6 +11,7 @@ import es.doterorgz.timebank.usecase.SearchActivitiesUseCase;
 import es.doterorgz.timebank.usecase.FindActivityByIdUseCase;
 import es.doterorgz.timebank.usecase.UpdateActivityUseCase;
 import es.doterorgz.timebank.usecase.DeleteActivityUseCase;
+import es.doterorgz.timebank.logging.Loggable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,7 @@ public class ActivityController {
     private final ActivityMapper mapper;
 
     @PostMapping
+    @Loggable
     public ResponseEntity<ActivityDto> create(@RequestBody ActivityDto dto) {
         var activity = mapper.toEntity(dto);
         var saved = createActivityUseCase.execute(activity);
@@ -41,11 +43,13 @@ public class ActivityController {
     }
 
     @GetMapping
+    @Loggable
     public ResponseEntity<List<ActivityDto>> findAll() {
         return ResponseEntity.ok(findAllActivitiesUseCase.execute().stream().map(mapper::toDto).toList());
     }
 
     @GetMapping("/{id}")
+    @Loggable
     public ResponseEntity<ActivityDto> findById(@PathVariable Long id) {
         var activity = findActivityByIdUseCase.execute(id);
         if (activity == null) {
@@ -55,6 +59,7 @@ public class ActivityController {
     }
 
     @GetMapping("/location")
+    @Loggable
     public ResponseEntity<List<ActivityDto>> byLocation(@RequestParam double lat,
                                                         @RequestParam double lon,
                                                         @RequestParam double distance) {
@@ -63,17 +68,20 @@ public class ActivityController {
     }
 
     @GetMapping("/search")
+    @Loggable
     public ResponseEntity<List<ActivityDto>> byText(@RequestParam String text) {
         return ResponseEntity.ok(searchActivitiesByTextUseCase.execute(text).stream().map(mapper::toDto).toList());
     }
 
     @GetMapping("/dates")
+    @Loggable
     public ResponseEntity<List<ActivityDto>> byDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.time.LocalDateTime start,
                                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.time.LocalDateTime end) {
         return ResponseEntity.ok(findActivitiesByDateRangeUseCase.execute(start, end).stream().map(mapper::toDto).toList());
     }
 
     @GetMapping("/filter")
+    @Loggable
     public ResponseEntity<List<ActivityDto>> search(@RequestParam double lat,
                                                     @RequestParam double lon,
                                                     @RequestParam double distance,
@@ -85,6 +93,7 @@ public class ActivityController {
     }
 
     @PutMapping("/{id}")
+    @Loggable
     public ResponseEntity<ActivityDto> update(@PathVariable Long id, @RequestBody ActivityDto dto) {
         var activity = mapper.toEntity(dto);
         var updated = updateActivityUseCase.execute(id, activity);
@@ -92,6 +101,7 @@ public class ActivityController {
     }
 
     @DeleteMapping("/{id}")
+    @Loggable
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteActivityUseCase.execute(id);
         return ResponseEntity.noContent().build();

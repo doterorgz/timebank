@@ -5,6 +5,7 @@ import es.doterorgz.timebank.domain.Activity;
 import es.doterorgz.timebank.mapper.ActivityEntityMapper;
 import es.doterorgz.timebank.repository.ActivityRepository;
 import es.doterorgz.timebank.service.ActivityService;
+import es.doterorgz.timebank.logging.Loggable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
     private final ActivityEntityMapper mapper;
 
     @Override
+    @Loggable
     public Activity create(Activity activity) {
         ActivityEntity entity = mapper.toEntity(activity);
         ActivityEntity saved = repository.save(entity);
@@ -25,16 +27,19 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @Loggable
     public List<Activity> findAll() {
         return repository.findAll().stream().map(mapper::toDomain).toList();
     }
 
     @Override
+    @Loggable
     public Activity findById(Long id) {
         return repository.findById(id).map(mapper::toDomain).orElse(null);
     }
 
     @Override
+    @Loggable
     public Activity update(Long id, Activity activity) {
         ActivityEntity entity = mapper.toEntity(activity);
         entity.setId(id);
@@ -43,11 +48,13 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @Loggable
     public void delete(Long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Loggable
     public List<Activity> findByLocation(double latitude, double longitude, double distance) {
         return repository.findByLocation(latitude, longitude, distance).stream()
                 .map(mapper::toDomain)
@@ -55,6 +62,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @Loggable
     public List<Activity> searchByText(String text) {
         return repository.searchByText(text).stream()
                 .map(mapper::toDomain)
@@ -62,6 +70,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @Loggable
     public List<Activity> findByDateRange(LocalDateTime start, LocalDateTime end) {
         return repository.findByDateRange(start, end).stream()
                 .map(mapper::toDomain)
@@ -69,6 +78,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @Loggable
     public List<Activity> search(double latitude, double longitude, double distance, String text,
                                 LocalDateTime start, LocalDateTime end) {
         return repository.search(latitude, longitude, distance, text, start, end)
