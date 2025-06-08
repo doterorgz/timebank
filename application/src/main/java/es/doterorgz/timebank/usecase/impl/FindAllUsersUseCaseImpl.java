@@ -4,11 +4,11 @@ import es.doterorgz.timebank.domain.User;
 import es.doterorgz.timebank.service.UserService;
 import es.doterorgz.timebank.usecase.FindAllUsersUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class FindAllUsersUseCaseImpl implements FindAllUsersUseCase {
 
