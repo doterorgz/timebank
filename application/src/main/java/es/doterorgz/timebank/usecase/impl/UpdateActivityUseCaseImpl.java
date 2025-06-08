@@ -4,9 +4,9 @@ import es.doterorgz.timebank.domain.Activity;
 import es.doterorgz.timebank.service.ActivityService;
 import es.doterorgz.timebank.usecase.UpdateActivityUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class UpdateActivityUseCaseImpl implements UpdateActivityUseCase {
 
